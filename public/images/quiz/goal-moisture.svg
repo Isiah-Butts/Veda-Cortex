@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
+  <rect width="320" height="320" rx="24" fill="#0b1120" />
+  <path d="M160 70 C140 105 120 135 120 165 C120 195 138 215 160 215 C182 215 200 195 200 165 C200 135 180 105 160 70 Z" fill="#0ea5e9" />
+  <text x="50%" y="82%" text-anchor="middle" fill="#e0f2fe" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">
+    Moisture &amp; Hydration
+  </text>
+</svg>

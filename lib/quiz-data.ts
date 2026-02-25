@@ -2,7 +2,7 @@ export interface QuizQuestion {
   id: string
   question: string
   description: string
-  options: { value: string; label: string; description: string }[]
+  options: { value: string; label: string; description: string; image: string }[]
 }
 
 export const quizQuestions: QuizQuestion[] = [
@@ -15,21 +15,25 @@ export const quizQuestions: QuizQuestion[] = [
         value: '1',
         label: 'Straight (Type 1)',
         description: 'Hair lies flat from root to tip with no visible curl.',
+        image: '/straight(type1).jpg',
       },
       {
         value: '2',
         label: 'Wavy (Type 2)',
         description: 'Hair has a slight S-shape or loose waves.',
+        image: '/wavy(type2).jpg',
       },
       {
         value: '3',
         label: 'Curly (Type 3)',
         description: 'Hair forms defined spiral curls or ringlets.',
+        image: '/curly(type3).jpg',
       },
       {
         value: '4',
         label: 'Coily (Type 4)',
         description: 'Hair forms tight coils, zigzag patterns, or kinks.',
+        image: '/coily(type4).jpg',
       },
     ],
   },
@@ -42,16 +46,19 @@ export const quizQuestions: QuizQuestion[] = [
         value: 'A',
         label: 'Loose / Large',
         description: 'Loose waves, big bouncy curls, or soft coils.',
+        image: '/images/quiz/curl-subtype-A-loose.svg',
       },
       {
         value: 'B',
         label: 'Medium / Defined',
         description: 'Medium waves, springy curls, or defined coils.',
+        image: '/images/quiz/curl-subtype-B-medium.svg',
       },
       {
         value: 'C',
         label: 'Tight / Small',
         description: 'Tight waves, corkscrew curls, or tight coils/kinks.',
+        image: '/images/quiz/curl-subtype-C-tight.svg',
       },
     ],
   },
@@ -66,18 +73,21 @@ export const quizQuestions: QuizQuestion[] = [
         label: 'Low Porosity',
         description:
           'Water beads up on hair and takes a long time to absorb. Hair dries slowly.',
+        image: '/images/quiz/porosity-low.svg',
       },
       {
         value: 'medium',
         label: 'Medium Porosity',
         description:
           'Water absorbs within a few minutes. Hair holds styles well.',
+        image: '/images/quiz/porosity-medium.svg',
       },
       {
         value: 'high',
         label: 'High Porosity',
         description:
           'Water absorbs instantly but hair dries quickly and gets frizzy.',
+        image: '/images/quiz/porosity-high.svg',
       },
     ],
   },
@@ -90,22 +100,26 @@ export const quizQuestions: QuizQuestion[] = [
         value: 'oily',
         label: 'Oily',
         description: 'Scalp gets greasy quickly, often within a day.',
+        image: '/images/quiz/scalp-oily.svg',
       },
       {
         value: 'balanced',
         label: 'Balanced',
         description: 'Scalp feels comfortable for 2-3 days after washing.',
+        image: '/images/quiz/scalp-balanced.svg',
       },
       {
         value: 'dry',
         label: 'Dry',
         description: 'Scalp often feels tight, flaky, or itchy.',
+        image: '/images/quiz/scalp-dry.svg',
       },
       {
         value: 'sensitive',
         label: 'Sensitive',
         description:
           'Scalp reacts easily to products, prone to irritation or redness.',
+        image: '/images/quiz/scalp-sensitive.svg',
       },
     ],
   },
@@ -119,16 +133,19 @@ export const quizQuestions: QuizQuestion[] = [
         value: 'fine',
         label: 'Fine',
         description: 'You can barely feel the strand between your fingers.',
+        image: '/images/quiz/thickness-fine.svg',
       },
       {
         value: 'medium',
         label: 'Medium',
         description: 'You can feel the strand but it feels smooth.',
+        image: '/images/quiz/thickness-medium.svg',
       },
       {
         value: 'coarse',
         label: 'Coarse',
         description: 'The strand feels thick and textured.',
+        image: '/images/quiz/thickness-coarse.svg',
       },
     ],
   },
@@ -141,17 +158,20 @@ export const quizQuestions: QuizQuestion[] = [
         value: 'low',
         label: 'Low Density',
         description: 'You can easily see your scalp through your hair.',
+        image: '/images/quiz/density-low.svg',
       },
       {
         value: 'medium',
         label: 'Medium Density',
         description: 'You can see some scalp if you look closely.',
+        image: '/images/quiz/density-medium.svg',
       },
       {
         value: 'high',
         label: 'High Density',
         description:
           'It is very hard to see your scalp through your hair.',
+        image: '/images/quiz/density-high.svg',
       },
     ],
   },
@@ -165,28 +185,33 @@ export const quizQuestions: QuizQuestion[] = [
         label: 'Hair Growth',
         description:
           'I want to grow my hair longer and prevent breakage.',
+        image: '/images/quiz/goal-growth.svg',
       },
       {
         value: 'moisture',
         label: 'Moisture & Hydration',
         description: 'My hair feels dry and needs more hydration.',
+        image: '/images/quiz/goal-moisture.svg',
       },
       {
         value: 'definition',
         label: 'Curl Definition',
         description: 'I want my curls to be more defined and less frizzy.',
+        image: '/images/quiz/goal-definition.svg',
       },
       {
         value: 'repair',
         label: 'Damage Repair',
         description:
           'My hair is damaged from heat, color, or chemical treatments.',
+        image: '/images/quiz/goal-repair.svg',
       },
       {
         value: 'volume',
         label: 'Volume & Fullness',
         description:
           'My hair is flat and I want more body and volume.',
+        image: '/images/quiz/goal-volume.svg',
       },
     ],
   },

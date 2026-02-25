@@ -1,4 +1,4 @@
-'use client'
+ 'use client'
 
 import { useState } from 'react'
 import { useApp } from '@/lib/app-context'
@@ -8,6 +8,7 @@ import { Progress } from '@/components/ui/progress'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import Image from 'next/image'
 
 export function QuizPage() {
   const { quizAnswers, setQuizAnswer, computeResults, setCurrentPage } = useApp()
@@ -101,18 +102,29 @@ export function QuizPage() {
                 >
                   {isSelected && <CheckCircle2 className="h-4 w-4" />}
                 </div>
-                <div className="flex flex-col gap-0.5">
-                  <span
-                    className={cn(
-                      'font-medium',
-                      isSelected ? 'text-primary' : 'text-foreground'
-                    )}
-                  >
-                    {option.label}
-                  </span>
-                  <span className="text-sm text-muted-foreground">
-                    {option.description}
-                  </span>
+                <div className="flex flex-1 items-start gap-4">
+                  <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-border bg-muted">
+                    <Image
+                      src={option.image}
+                      alt={option.label}
+                      fill
+                      sizes="80px"
+                      className="object-cover"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-0.5">
+                    <span
+                      className={cn(
+                        'font-medium',
+                        isSelected ? 'text-primary' : 'text-foreground'
+                      )}
+                    >
+                      {option.label}
+                    </span>
+                    <span className="text-sm text-muted-foreground">
+                      {option.description}
+                    </span>
+                  </div>
                 </div>
               </button>
             )
