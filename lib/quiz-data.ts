@@ -79,21 +79,21 @@ export const quizQuestions: QuizQuestion[] = [
         label: 'Low Porosity',
         description:
           'Water beads up on hair and takes a long time to absorb. Hair dries slowly.',
-        image: '/images/quiz/porosity-low.svg',
+        image: '/lowPorosity.jpg',
       },
       {
         value: 'medium',
         label: 'Medium Porosity',
         description:
           'Water absorbs within a few minutes. Hair holds styles well.',
-        image: '/images/quiz/porosity-medium.svg',
+        image: '/mediumPorosity.jpg',
       },
       {
         value: 'high',
         label: 'High Porosity',
         description:
           'Water absorbs instantly but hair dries quickly and gets frizzy.',
-        image: '/images/quiz/porosity-high.svg',
+        image: '/highPorosity.jpg',
       },
     ],
   },

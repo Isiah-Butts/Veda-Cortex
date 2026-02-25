@@ -85,34 +85,34 @@ export function QuizPage() {
                 key={option.value}
                 onClick={() => handleSelectOption(option.value)}
                 className={cn(
-                  'flex items-start gap-4 rounded-xl border-2 p-4 text-left transition-all',
+                  'flex flex-col rounded-xl border-2 p-0 text-left transition-all overflow-hidden',
                   isSelected
                     ? 'border-primary bg-primary/5 shadow-sm'
                     : 'border-border bg-background hover:border-primary/40 hover:bg-muted/50'
                 )}
                 aria-pressed={isSelected}
               >
-                <div
-                  className={cn(
-                    'mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-colors',
-                    isSelected
-                      ? 'border-primary bg-primary text-primary-foreground'
-                      : 'border-muted-foreground/30'
-                  )}
-                >
-                  {isSelected && <CheckCircle2 className="h-4 w-4" />}
+                <div className="relative h-44 w-full shrink-0 overflow-hidden border-b border-border bg-muted sm:h-52">
+                  <Image
+                    src={option.image}
+                    alt={option.label}
+                    fill
+                    sizes="(max-width: 640px) 100vw, 672px"
+                    className="object-cover"
+                  />
                 </div>
-                <div className="flex flex-1 items-start gap-4">
-                  <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-border bg-muted">
-                    <Image
-                      src={option.image}
-                      alt={option.label}
-                      fill
-                      sizes="80px"
-                      className="object-cover"
-                    />
+                <div className="flex items-start gap-3 p-4">
+                  <div
+                    className={cn(
+                      'mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full border-2 transition-colors',
+                      isSelected
+                        ? 'border-primary bg-primary text-primary-foreground'
+                        : 'border-muted-foreground/30'
+                    )}
+                  >
+                    {isSelected && <CheckCircle2 className="h-4 w-4" />}
                   </div>
-                  <div className="flex flex-col gap-0.5">
+                  <div className="flex min-w-0 flex-1 flex-col gap-0.5">
                     <span
                       className={cn(
                         'font-medium',
