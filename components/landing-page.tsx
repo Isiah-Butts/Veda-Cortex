@@ -65,12 +65,15 @@ export function LandingPage() {
               </Button>
             </div>
           </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-lg md:aspect-square">
+          <div
+            className="relative mx-auto w-full max-w-full overflow-hidden rounded-2xl border border-border bg-muted shadow-lg [height:clamp(17.5rem,min(52dvh,92vw),45rem)] md:[height:clamp(20rem,min(50dvh,45vw),46rem)]"
+          >
             <Image
               src="/firstpage.jpg"
               alt="Beautiful natural hair illuminated by warm golden light"
               fill
-              className="object-cover"
+              sizes="(max-width: 767px) 100vw, (max-width: 1200px) 50vw, 36rem"
+              className="object-contain object-center p-2 sm:p-4 md:p-5"
               priority
             />
           </div>

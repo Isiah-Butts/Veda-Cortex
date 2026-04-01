@@ -1,4 +1,4 @@
- 'use client'
+'use client'
 
 import { useState } from 'react'
 import { useApp } from '@/lib/app-context'
@@ -92,12 +92,12 @@ export function QuizPage() {
                 )}
                 aria-pressed={isSelected}
               >
-                <div className="relative h-52 w-full shrink-0 border-b border-border bg-muted p-2 sm:h-64 sm:p-3">
+                <div className="relative w-full shrink-0 border-b border-border bg-muted p-2 sm:p-3 [height:clamp(13rem,min(38dvh,78vw),26rem)] sm:[height:clamp(15rem,min(36dvh,72vw),28rem)]">
                   <Image
                     src={option.image}
                     alt={option.label}
                     fill
-                    sizes="(max-width: 640px) 100vw, 672px"
+                    sizes="(max-width: 640px) 100vw, min(672px, 100vw)"
                     className="object-contain object-center"
                   />
                 </div>
