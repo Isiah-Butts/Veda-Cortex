@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
-  <rect width="320" height="320" rx="24" fill="#020617" />
-  <rect x="40" y="190" width="240" height="60" rx="18" fill="#111827" />
-  <path d="M80 165 Q95 150 110 165 T140 165 T170 165 T200 165 T230 165" stroke="#e5e7eb" stroke-width="3" fill="none" stroke-dasharray="6 4" />
-  <text x="50%" y="82%" text-anchor="middle" fill="#e5e7eb" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">
-    Dry Scalp
-  </text>
-</svg>

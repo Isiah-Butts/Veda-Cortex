@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
-  <rect width="320" height="320" rx="24" fill="#020617" />
-  <circle cx="100" cy="120" r="26" stroke="#e5e7eb" stroke-width="8" fill="none" />
-  <circle cx="160" cy="170" r="24" stroke="#9ca3af" stroke-width="8" fill="none" />
-  <circle cx="215" cy="115" r="22" stroke="#e5e7eb" stroke-width="8" fill="none" />
-  <text x="50%" y="82%" text-anchor="middle" fill="#f9fafb" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">
-    Tight / Small
-  </text>
-</svg>

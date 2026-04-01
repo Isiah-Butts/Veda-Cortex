@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
-  <rect width="320" height="320" rx="24" fill="#020617" />
-  <path d="M70 80 C95 120, 125 120, 150 80 C175 40, 205 40, 230 80" stroke="#e5e7eb" stroke-width="8" fill="none" stroke-linecap="round" />
-  <path d="M70 150 C95 190, 125 190, 150 150 C175 110, 205 110, 230 150" stroke="#9ca3af" stroke-width="8" fill="none" stroke-linecap="round" />
-  <text x="50%" y="82%" text-anchor="middle" fill="#f9fafb" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" font-size="18">
-    Medium / Defined
-  </text>
-</svg>
