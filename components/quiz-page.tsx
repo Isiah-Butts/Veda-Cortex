@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import { useApp } from '@/lib/app-context'
+import { isFirebaseConfigured } from '@/lib/firebase'
+import { saveQuizResult } from '@/lib/firebase-db'
 import { quizQuestions } from '@/lib/quiz-data'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
@@ -11,9 +13,17 @@ import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
 export function QuizPage() {
-  const { quizAnswers, setQuizAnswer, computeResults, setCurrentPage } = useApp()
+  const {
+    quizAnswers,
+    setQuizAnswer,
+    computeResults,
+    setCurrentPage,
+    currentUserEmail,
+  } = useApp()
   const [currentStep, setCurrentStep] = useState(0)
   const [validationError, setValidationError] = useState(false)
+  const [submitError, setSubmitError] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const totalSteps = quizQuestions.length
   const question = quizQuestions[currentStep]
@@ -38,13 +48,32 @@ export function QuizPage() {
     }
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!currentAnswer) {
       setValidationError(true)
       return
     }
-    computeResults()
+    setSubmitError('')
+    setIsSubmitting(true)
+    const computedData = computeResults()
+
+    try {
+      await saveQuizResult({
+        email: currentUserEmail,
+        answers: quizAnswers,
+        hairProfile: computedData.hairProfile,
+        routineSteps: computedData.routineSteps,
+        recommendedProducts: computedData.recommendedProducts,
+      })
+    } catch (error) {
+      console.error('Unable to save quiz result to Firebase.', error)
+      setSubmitError('We could not save your quiz results right now.')
+      setIsSubmitting(false)
+      return
+    }
+
     setCurrentPage('results')
+    setIsSubmitting(false)
   }
 
   const handleSelectOption = (value: string) => {
@@ -135,6 +164,16 @@ export function QuizPage() {
               Please select an option before continuing.
             </p>
           )}
+          {submitError ? (
+            <p className="mt-1 text-center text-sm text-destructive" role="alert">
+              {submitError}
+            </p>
+          ) : null}
+          <p className="mt-1 text-center text-xs text-muted-foreground">
+            {isFirebaseConfigured
+              ? 'Quiz responses are saved to Firebase when you submit.'
+              : 'Firebase is not configured yet. Add your team Firebase keys to .env.local to start saving quiz responses.'}
+          </p>
         </CardContent>
       </Card>
 
@@ -150,8 +189,8 @@ export function QuizPage() {
           Back
         </Button>
         {isLastStep ? (
-          <Button onClick={handleSubmit} className="gap-2">
-            See My Results
+          <Button onClick={handleSubmit} className="gap-2" disabled={isSubmitting}>
+            {isSubmitting ? 'Saving Results...' : 'See My Results'}
             <CheckCircle2 className="h-4 w-4" />
           </Button>
         ) : (

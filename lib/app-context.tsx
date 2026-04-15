@@ -22,6 +22,12 @@ interface QuizAnswers {
   [questionId: string]: string
 }
 
+interface ComputedQuizData {
+  hairProfile: HairProfile
+  routineSteps: RoutineStep[]
+  recommendedProducts: Product[]
+}
+
 interface AppContextType {
   currentPage: Page
   setCurrentPage: (page: Page) => void
@@ -30,10 +36,12 @@ interface AppContextType {
   resetQuiz: () => void
   isLoggedIn: boolean
   setIsLoggedIn: (v: boolean) => void
+  currentUserEmail: string | null
+  setCurrentUserEmail: (email: string | null) => void
   hairProfile: HairProfile | null
   routineSteps: RoutineStep[]
   recommendedProducts: Product[]
-  computeResults: () => void
+  computeResults: () => ComputedQuizData
   savedProducts: Product[]
   toggleSaveProduct: (product: Product) => void
   routineChecks: Record<string, boolean>
@@ -46,6 +54,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [currentPage, setCurrentPage] = useState<Page>('landing')
   const [quizAnswers, setQuizAnswers] = useState<QuizAnswers>({})
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [currentUserEmail, setCurrentUserEmail] = useState<string | null>(null)
   const [hairProfile, setHairProfile] = useState<HairProfile | null>(null)
   const [routineSteps, setRoutineSteps] = useState<RoutineStep[]>([])
   const [recommendedProducts, setRecommendedProducts] = useState<Product[]>([])
@@ -66,28 +75,42 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setRoutineChecks({})
   }, [])
 
+  const buildComputedQuizData = useCallback(
+    (answers: QuizAnswers): ComputedQuizData => {
+      const profile: HairProfile = {
+        hairType: getHairType(
+          answers.curl_pattern || '2',
+          answers.curl_subtype || 'A'
+        ),
+        porosity: answers.porosity || 'medium',
+        scalpCondition: answers.scalp_condition || 'balanced',
+        thickness: answers.thickness || 'medium',
+        density: answers.density || 'medium',
+        goal: answers.goals || 'moisture',
+      }
+
+      return {
+        hairProfile: profile,
+        routineSteps: getRoutineSteps(profile),
+        recommendedProducts: getRecommendedProducts(profile),
+      }
+    },
+    []
+  )
+
   const computeResults = useCallback(() => {
-    const profile: HairProfile = {
-      hairType: getHairType(
-        quizAnswers.curl_pattern || '2',
-        quizAnswers.curl_subtype || 'A'
-      ),
-      porosity: quizAnswers.porosity || 'medium',
-      scalpCondition: quizAnswers.scalp_condition || 'balanced',
-      thickness: quizAnswers.thickness || 'medium',
-      density: quizAnswers.density || 'medium',
-      goal: quizAnswers.goals || 'moisture',
-    }
-    setHairProfile(profile)
-    setRoutineSteps(getRoutineSteps(profile))
-    setRecommendedProducts(getRecommendedProducts(profile))
+    const computedData = buildComputedQuizData(quizAnswers)
+    setHairProfile(computedData.hairProfile)
+    setRoutineSteps(computedData.routineSteps)
+    setRecommendedProducts(computedData.recommendedProducts)
 
     const checks: Record<string, boolean> = {}
-    getRoutineSteps(profile).forEach((step) => {
+    computedData.routineSteps.forEach((step) => {
       checks[step.id] = false
     })
     setRoutineChecks(checks)
-  }, [quizAnswers])
+    return computedData
+  }, [buildComputedQuizData, quizAnswers])
 
   const toggleSaveProduct = useCallback((product: Product) => {
     setSavedProducts((prev) => {
@@ -111,6 +134,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         resetQuiz,
         isLoggedIn,
         setIsLoggedIn,
+        currentUserEmail,
+        setCurrentUserEmail,
         hairProfile,
         routineSteps,
         recommendedProducts,

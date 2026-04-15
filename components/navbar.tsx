@@ -6,7 +6,13 @@ import { Leaf, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 
 export function Navbar() {
-  const { currentPage, setCurrentPage, isLoggedIn, setIsLoggedIn } = useApp()
+  const {
+    currentPage,
+    setCurrentPage,
+    isLoggedIn,
+    setIsLoggedIn,
+    setCurrentUserEmail,
+  } = useApp()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
@@ -47,6 +53,7 @@ export function Navbar() {
               size="sm"
               onClick={() => {
                 setIsLoggedIn(false)
+                setCurrentUserEmail(null)
                 setCurrentPage('landing')
               }}
             >
@@ -104,6 +111,7 @@ export function Navbar() {
               className="justify-start"
               onClick={() => {
                 setIsLoggedIn(false)
+                setCurrentUserEmail(null)
                 setCurrentPage('landing')
                 setMobileMenuOpen(false)
               }}

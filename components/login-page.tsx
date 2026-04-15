@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import { useApp } from '@/lib/app-context'
+import { isFirebaseConfigured } from '@/lib/firebase'
+import { saveUserLogin } from '@/lib/firebase-db'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -15,10 +17,13 @@ import {
 import { Leaf } from 'lucide-react'
 
 export function LoginPage() {
-  const { setIsLoggedIn, setCurrentPage, hairProfile } = useApp()
+  const { setIsLoggedIn, setCurrentPage, hairProfile, setCurrentUserEmail } =
+    useApp()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const validate = () => {
     const newErrors: { email?: string; password?: string } = {}
@@ -36,15 +41,35 @@ export function LoginPage() {
     return Object.keys(newErrors).length === 0
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+  const completeLogin = async () => {
     if (!validate()) return
+    setSubmitError('')
+    setIsSubmitting(true)
+
+    const normalizedEmail = email.trim().toLowerCase()
+
+    try {
+      await saveUserLogin({ email: normalizedEmail })
+    } catch (error) {
+      console.error('Unable to save login event to Firebase.', error)
+      setSubmitError('We could not save your login details right now.')
+      setIsSubmitting(false)
+      return
+    }
+
+    setCurrentUserEmail(normalizedEmail)
     setIsLoggedIn(true)
     if (hairProfile) {
       setCurrentPage('dashboard')
     } else {
       setCurrentPage('quiz')
     }
+    setIsSubmitting(false)
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    await completeLogin()
   }
 
   return (
@@ -105,21 +130,25 @@ export function LoginPage() {
                 </p>
               )}
             </div>
-            <Button type="submit" className="mt-2 w-full">
-              Sign In
+            <Button type="submit" className="mt-2 w-full" disabled={isSubmitting}>
+              {isSubmitting ? 'Signing In...' : 'Sign In'}
             </Button>
           </form>
+          {submitError ? (
+            <p className="mt-4 text-center text-sm text-destructive">
+              {submitError}
+            </p>
+          ) : null}
+          <p className="mt-4 text-center text-xs text-muted-foreground">
+            {isFirebaseConfigured
+              ? 'Login activity will be saved to Firebase. Passwords are not stored by this app.'
+              : 'Firebase is not configured yet. Add your team Firebase keys to .env.local to start saving login data.'}
+          </p>
           <p className="mt-4 text-center text-sm text-muted-foreground">
             Don&apos;t have an account?{' '}
             <button
-              onClick={() => {
-                setIsLoggedIn(true)
-                if (hairProfile) {
-                  setCurrentPage('dashboard')
-                } else {
-                  setCurrentPage('quiz')
-                }
-              }}
+              type="button"
+              onClick={completeLogin}
               className="font-medium text-primary underline-offset-4 hover:underline"
             >
               Sign up for free
