@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "Veda Cortex",
+    "slug": "veda-cortex-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon-light-32x32.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/icon-light-32x32.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#fffaf4"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": { "supportsTablet": true },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon-light-32x32.png",
+        "backgroundColor": "#fffaf4"
+      },
+      "package": "com.vedacortex.mobile"
+    }
+  }
+}

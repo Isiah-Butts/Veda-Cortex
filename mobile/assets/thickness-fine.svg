@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
+  <rect width="320" height="320" rx="24" fill="#020617" />
+  <line x1="110" y1="70" x2="110" y2="240" stroke="#e5e7eb" stroke-width="2.5" />
+  <line x1="160" y1="65" x2="160" y2="245" stroke="#9ca3af" stroke-width="2.5" />
+  <line x1="210" y1="75" x2="210" y2="235" stroke="#e5e7eb" stroke-width="2.5" />
+  <text x="50%" y="82%" text-anchor="middle" fill="#e5e7eb" font-family="system-ui,sans-serif" font-size="18">Fine</text>
+</svg>
